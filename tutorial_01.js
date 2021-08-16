@@ -16,7 +16,9 @@ function is_biggie_size(x){
 }
 
 function combo_price(combo) {
-    return (is_biggie_size(combo)) ? (unbiggie_size(combo) * 1.17) + 0.5 : combo * 1.17;
+    return (is_biggie_size(combo)) ? 
+    (unbiggie_size(combo) * 1.17) + 0.5 : 
+    combo * 1.17;
 }
 
 function empty_order() {
@@ -24,8 +26,13 @@ function empty_order() {
 }
 
 function add_to_order(order, combo) {
-    return parse_int(stringify(combo) + stringify(order), 10);
+    return parse_int(stringify(order) + stringify(combo), 10);
 }
+
+// Another Soln
+// function add_to_order(x, y) {
+//     return x * 10 + y;
+// }
 
 function last_combo(order) {
     return (order % 10);
@@ -35,5 +42,3 @@ function last_combo(order) {
 function other_combos(order) {
     return math_floor(order / 10);
 }
-
-combo_price(5);
