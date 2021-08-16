@@ -11,16 +11,12 @@ function unbiggie_size(combo) {
     return combo - 4;
 }
 
-function is_biggie_size(combo) {
-    return (combo > 4);
+function is_biggie_size(x){
+    return x>=5 && x<=8;
 }
 
 function combo_price(combo) {
-    if (is_biggie_size(combo)) {
-        return (unbiggie_size(combo) * 1.17) + 0.5;
-    } else {
-        return combo * 1.17;
-    }
+    return (is_biggie_size(combo)) ? (unbiggie_size(combo) * 1.17) + 0.5 : combo * 1.17;
 }
 
 function empty_order() {
@@ -40,11 +36,4 @@ function other_combos(order) {
     return math_floor(order / 10);
 }
 
-const a = 5;
-const b = 4;
-
-a === 4
-? 6
-: b === 4
-? 6 + 7 + a
-: 25;
+combo_price(5);
