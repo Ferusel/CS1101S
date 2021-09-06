@@ -3,7 +3,7 @@
 // const l = list(1);
 // const l = list(1, 2);
 // const l = list(1,2,3);
-// const l = list(1,2,3,4);
+const l = list(1,2,3,4);
 // const l = list(1,2,3,4,5);
 // const l = list("a", "x", "b", "y", "c", "z", "d");
 
@@ -45,7 +45,40 @@ function sums_recur(items) {
                             null));
 }
 
-sums_recur(l);
-every_first(l);
-every_second(l);
-sum(l);
+function sums_cleaner(items) {
+    if (is_null(items)) {
+        return pair(0, pair(0, null));
+    } else if (length(items) === 1) {
+        return pair(head(items), pair(0, null));
+    } else {
+        const wishful = sums_cleaner(tail(tail(items)));
+        return pair(head(wishful) + head(items),
+                    pair(head(tail(wishful)) + head(tail(items)),
+                        null));
+    }
+}
+
+function sums_iter(items) {
+    function inner_sum(a, b, items) {
+        if (length(items) <= 1) {
+            const even_sum = tail(a) ? head(a) : head(b);
+            const odd_sum = !tail(a) ? head(a) : head(b);
+            return pair(even_sum, pair(odd_sum, null));
+        } else {
+            return inner_sum(b, 
+                            pair(head(a) + head(items), tail(a)),
+                            tail(items));
+        }
+    }
+    
+    return inner_sum(pair(0, true),
+                    pair(0, false),
+                    items);
+}
+
+// sums_recur(l);
+// every_first(l);
+// every_second(l);
+// sum(l);
+// sums_cleaner(l);
+// sums_iter(l);
