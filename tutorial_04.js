@@ -24,3 +24,7 @@
 
 // const l = list(7, list(list(6, 5), list(4), 3, 2), list(list(1)));
 // head(head(head(tail(tail(l)))));
+
+// const l = list(list(0), list(list(1)));
+// const l = list(list(0), list(1));
+// draw_data(l);
