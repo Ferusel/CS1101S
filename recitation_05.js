@@ -46,3 +46,9 @@ function tree_sum_acc(tree) {
 }
 
 tree_sum_acc(lst_c);
+
+// f2 needs to be commutative and associative and the parameter "initial" 
+// needs to be the neutral element wrt f2. 
+
+// Commutative: axb = bxa
+// Associative: a+(b+c) = (a+b)+c
