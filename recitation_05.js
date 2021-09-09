@@ -1,16 +1,20 @@
+// function flatten_list(lst) {
+//     if (is_null(lst)) {
+//         return null;
+//     } else if (is_list(head(lst))) {
+//         return append(flatten_list(head(lst)),
+//                     flatten_list(tail(lst)));
+//     } else {
+//         return pair(head(lst),
+//                     flatten_list(tail(lst)));
+//     }
+// }
+
 function flatten_list(lst) {
-    if (is_null(lst)) {
-        return null;
-    } else if (is_list(head(lst))) {
-        return append(flatten_list(head(lst)),
-                    flatten_list(tail(lst)));
-    } else {
-        return pair(head(lst),
-                    flatten_list(tail(lst)));
-    }
+    return accumulate(append, null, lst);
 }
 
-// const lst_a = flatten_list(list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9)));
+const lst_a = flatten_list(list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9)));
 const lst_b = list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9));
 const lst_c = list(1,2,3,4);
 
@@ -30,11 +34,10 @@ function accumulate_tree(f, combiner, initial, tree) {
     if (is_null(tree)) {
         return initial;
     } else {
-        return combiner(f(head(tree)),
-                        accumulate_tree(f,
-                                        combiner,
-                                        initial,
-                                        tail(tree)));
+        return combiner(f(is_list(head(tree))
+                            ? accumulate_tree(f, combiner, initial, tail(tree))
+                            : f(head(tree)),
+                        accumulate_tree(f, combiner, initial, tail(tree)));
     }
 }
 
