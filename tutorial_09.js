@@ -25,33 +25,33 @@
 // d_filter(x => x % 2 === 0, L); // returns [2, [4, [6, [8, null]]]]
 // L; // What is L now?
 
-// Q3
-let a = 10;
-function foo(x) {
-    let b = 0;
-    function goo(x) {
-        let a = 30;
-        if (x <= 2) {
-            a = a + x;
-            b = b + x;
-            // Breakpoint #4
-            undefined;
-        } else {
-            // Breakpoint #3
-            undefined;
-            goo(x - 1);
-        }
-    }
-    a = a + x;
-    b = b + x;
-    // Breakpoint #2
-    undefined;
-    goo(3);
-}
-// Breakpoint #1
-undefined;
-foo(1);
-// Breakpoint #5
-undefined;
-// display(a);
-// display(b);
+// // Q3
+// let a = 10;
+// function foo(x) {
+//     let b = 0;
+//     function goo(x) {
+//         let a = 30;
+//         if (x <= 2) {
+//             a = a + x;
+//             b = b + x;
+//             // Breakpoint #4
+//             undefined;
+//         } else {
+//             // Breakpoint #3
+//             undefined;
+//             goo(x - 1);
+//         }
+//     }
+//     a = a + x;
+//     b = b + x;
+//     // Breakpoint #2
+//     undefined;
+//     goo(3);
+// }
+// // Breakpoint #1
+// undefined;
+// foo(1);
+// // Breakpoint #5
+// undefined;
+// // display(a);
+// // display(b);
