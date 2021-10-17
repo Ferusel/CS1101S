@@ -9,3 +9,10 @@ function n_of_n_stream() {
 
 eval_stream(n_of_n_stream(), 10);
 
+function shorten_stream(s, k) {
+    return k === 0 || is_null(s)
+            ? null
+            : pair(head(s),
+                    () => shorten_stream(stream_tail(s), k-1));
+}
+
