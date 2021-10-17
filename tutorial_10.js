@@ -40,21 +40,22 @@ function bubblesort_array(A) {
 
 function bubblesort_list(lst) {
     const len = length(lst);
+    
     for (let i = len - 1; i >= 1; i = i-1) {
-        let lst_head = lst;
+        let curr = lst;
         
         for (let j = 0; j < i; j = j+1) {
-            let current = head(lst_head);
-            let next = head(tail(lst_head));
+            let current = head(curr);
+            let next = head(tail(curr));
             if (current > next) {
-                const tmp = head(lst_head);
-                set_head(lst, next);
-                set_head(tail(lst), tmp);
+                const tmp = head(curr);
+                set_head(curr, next);
+                set_head(tail(curr), tmp);
             }
+            
+            // Traverse through the list
+            curr = tail(curr);
         }
-        
-        // Traverse through the list
-        lst_head = tail(lst_head);
     }
 }
 
