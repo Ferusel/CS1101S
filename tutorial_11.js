@@ -60,3 +60,14 @@ function fun_to_series(fun) {
     return stream_map(fun, non_neg_integers);
 }
 
+const alt_ones = pair(1, () => negate_series(alt_ones));
+// const alt_ones = pair(1, 
+//                     () => pair(-1, 
+//                                 () => alt_ones));
+eval_stream(alt_ones, 5);
+
+// const zeroes = add_streams(alt_ones, stream_tail(alt_ones));
+eval_stream(zeroes, 5);
+
+
+
