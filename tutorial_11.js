@@ -66,8 +66,19 @@ const alt_ones = pair(1, () => negate_series(alt_ones));
 //                                 () => alt_ones));
 eval_stream(alt_ones, 5);
 
-// const zeroes = add_streams(alt_ones, stream_tail(alt_ones));
+const zeroes = add_streams(alt_ones, stream_tail(alt_ones));
 eval_stream(zeroes, 5);
 
+const s1 = n => fun_to_series(x => math_pow(n, x)); // Accepts value of x
+const s1_res = eval_stream(s1(3), 4); 
+display("s1_res: " + stringify(s1_res));
+// Get sum of s1
+const s1_sum = accumulate((x, y) => x+y, 0, s1_res); // 1 + 3 + 3^2 + 3^3
+display("s1_sum: " + stringify(s1_sum));
 
-
+const s2 = n => fun_to_series(x => (x+1) * math_pow(n, x));
+const s2_res = eval_stream(s2(3), 4);
+display("s2_res: " + stringify(s2_res));
+// Get sum of s2
+const s2_sum = accumulate((x, y) => x+y, 0, s2_res); // 1 + 2(3) + 3(3^2) + 4(3^3)
+display("s2_sum: " + stringify(s2_sum));
