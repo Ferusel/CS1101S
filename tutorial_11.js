@@ -36,6 +36,7 @@ function add_streams(s1, s2) {
 
 const add_series = add_streams;
 const scale_series = scale_stream;
+const non_neg_integers = integers_from(0);
 
 function negate_series(s) {
     return scale_series(-1, s);
