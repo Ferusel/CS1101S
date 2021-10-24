@@ -48,3 +48,18 @@ function subtract_series(s1, s2) {
     return add_series(s1, negate_series(s2));
 }
 
+function coeffs_to_series(list_of_coeffs) {
+    const zeros = pair(0, () => zeros);
+    function iter(list) {
+        return is_null(list)
+            ? zeros
+            : pair(head(list),
+            () => iter(tail(list)));
+    }
+    return iter(list_of_coeffs);
+}
+
+function fun_to_series(fun) {
+    return stream_map(fun, non_neg_integers);
+}
+
