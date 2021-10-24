@@ -34,10 +34,6 @@ function add_streams(s1, s2) {
                         stream_tail(s2)));
 }
 
-function scale_stream(c, stream) {
-    return stream_map(x => c * x, stream);
-}
-
 const add_series = add_streams;
 const scale_series = scale_stream;
 
