@@ -507,7 +507,6 @@ function parse_and_evaluate(program) {
 
 // parse_and_evaluate("3 % 3;");
 
-parse_and_evaluate("false && 0();");
 
 // parse_and_evaluate("1 + 2;");
 
@@ -531,3 +530,5 @@ parse_and_evaluate("false && 0();");
 // }
 // fact(4);
 // `);
+
+parse_and_evaluate(`parse('parse("1;");');`);
