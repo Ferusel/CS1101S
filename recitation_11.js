@@ -8,14 +8,17 @@
 //
 
 function evaluate(component, env) { 
+    display(component);
+    display(is_logical_composition(component));
+    display("==================");
     return is_literal(component)
            ? literal_value(component)
            : is_conditional(component)
-           ? is_logical_composition(component)
-           : eval_logic(component)
            ? eval_conditional(component, env)
            : is_sequence(component)
            ? eval_sequence(sequence_statements(component), env)
+           : is_logical_composition(component)
+           ? eval_logic(component)
            : is_name(component)
            ? lookup_symbol_value(symbol_of_name(component), env)
            : is_block(component)
@@ -132,13 +135,21 @@ function make_literal(value) {
 }
 
 function eval_logic(component) {
-    display(component);
-    let operand1 = logical_composition_first_component(component);
-    let operand2 = logical_composition_second_component(component);
+    display("eval_logic called");
+    let operand1 = literal_value(logical_composition_first_component(component));
+    let operand2 = literal_value(logical_composition_second_component(component));
     let op = logical_symbol(component);
-    return op === "&&"
-            ? operand1 && operand2
-            : operand1 || operand2;
+    if (op === "&&") {
+        if (!operand1) {
+            return false;
+        }
+        return operand1 && operand2;
+    } else {
+        if (operand1) {
+            return true;
+        }
+        return operand1 || operand2;
+    }
 }
 
 // literals
