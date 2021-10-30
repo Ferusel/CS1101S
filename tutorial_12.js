@@ -3,6 +3,8 @@
 // functions from SICP JS 4.1.1
 
 function evaluate(component, env) {
+    display("==========");
+    display(component);
     return is_literal(component)
            ? literal_value(component)
            : is_name(component)
@@ -60,18 +62,56 @@ function eval_conditional(component, env) {
            : evaluate(conditional_alternative(component), env);
 }
 
+// MODIFIED Q1
+function contains_function_declaration(stmts) {
+    // display(stmts);
+    return is_null(stmts)
+            ? false
+            : (head(head(stmts)) === "function_declaration") || (contains_function_declaration(tail(stmts)));
+}
+function get_function_declaration(stmts) {
+    if (head(head(stmts)) === "function_declaration") {
+        let res = (head(stmts));
+        display(res);
+        return res;
+    } else {
+        return get_function_declaration(tail(stmts));
+    }
+}
+function get_remainder_stmts(stmts, evaluated_fn) {
+    return is_null(stmts)
+            ? null
+            : head(stmts) === evaluated_fn
+            ? get_remainder_stmts(tail(stmts), evaluated_fn)
+            : pair(head(stmts), 
+                    get_remainder_stmts(tail(stmts), evaluated_fn));
+}
+
 function eval_sequence(stmts, env) {
     if (is_empty_sequence(stmts)) {
         return undefined;
     } else if (is_last_statement(stmts)) {
         return evaluate(first_statement(stmts), env);
     } else {
-        const first_stmt_value = 
-            evaluate(first_statement(stmts), env);
+        let first_stmt_value = undefined;
+        let remainder = undefined;
+        // Checks if function declaration exists in the sequence.
+        // If it does, hoist it.
+        if (contains_function_declaration(stmts)) {
+            display("function declaration exists");
+            // Hoist
+            const to_eval = get_function_declaration(stmts);
+            remainder = get_remainder_stmts(stmts, to_eval); // Remove the hoisted fn
+            first_stmt_value = evaluate(to_eval, env);
+        } else {
+            display("no function declaration");
+            first_stmt_value = evaluate(first_statement(stmts), env);
+            remainder = rest_statements(stmts);
+        }
         if (is_return_value(first_stmt_value)) {
             return first_stmt_value;
         } else {
-            return eval_sequence(rest_statements(stmts), env);
+            return eval_sequence(remainder, env);
         }
     }
 }
@@ -91,6 +131,13 @@ function eval_block(component, env) {
     const body = block_body(component);
     const locals = scan_out_declarations(body);
     const unassigneds = list_of_unassigned(locals);
+    // display("=======");
+    // display("BODY");
+    // display(body);
+    // display("LOCALS");
+    // display(locals);
+    // display("UNASSIGNEDS");
+    // display(unassigneds);
     return evaluate(body, extend_environment(locals,
                                              unassigneds, 
                                              env));
@@ -473,14 +520,29 @@ function parse_and_evaluate(input) {
 }
 
 // test cases
+let normal = 
+`               
+{
+    function f(y) {
+        return y + 34;
+    }
+    const x = f(8);
+    x;
+}`;
 
-parse_and_evaluate(`               
-function factorial(n) {
-    return n === 1
-           ? 1
-           : n * factorial(n - 1);
+let hoisted = 
+`
+{
+    const x = f(8);
+    function f(y) {
+        return y + 34;
+    }
+    x;
 }
-factorial(5);`);
+`;
+
+// parse(normal);
+// parse_and_evaluate(hoisted);
 
 
 
