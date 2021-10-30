@@ -569,6 +569,8 @@ let hoisted =
 // parse_and_evaluate(hoisted);
 
 // Q2
+// Hacky solution that only works if the "hidden" name is in a conditional
+// as shown below
 // let test1 = `true ? abracadabra(simsalabim) : 42;`;
 // let test2 = `false ? abracadabra(simsalabim) : 42;`;
 // parse_and_evaluate(test1);
