@@ -63,21 +63,26 @@ function eval_conditional(component, env) {
 }
 
 // MODIFIED Q1
+// Checks if a listof statements contain any function declaration
 function contains_function_declaration(stmts) {
     // display(stmts);
     return is_null(stmts)
             ? false
             : (head(head(stmts)) === "function_declaration") || (contains_function_declaration(tail(stmts)));
 }
+
+// Grab a function declaration from a given listof statements
 function get_function_declaration(stmts) {
     if (head(head(stmts)) === "function_declaration") {
         let res = (head(stmts));
-        display(res);
+        // display(res);
         return res;
     } else {
         return get_function_declaration(tail(stmts));
     }
 }
+
+// Remove the specified function declaration from a given listof statements
 function get_remainder_stmts(stmts, evaluated_fn) {
     return is_null(stmts)
             ? null
@@ -520,6 +525,7 @@ function parse_and_evaluate(input) {
 }
 
 // test cases
+// Q1
 let normal = 
 `               
 {
@@ -541,10 +547,12 @@ let hoisted =
 }
 `;
 
-// parse(normal);
+// parse_and_evaluate(normal);
 // parse_and_evaluate(hoisted);
 
-
+// Q2
+let test1 = `false ? abracadabra(simsalabim) : 42;`;
+parse_and_evaluate(test1);
 
 
 
