@@ -3,8 +3,8 @@
 // functions from SICP JS 4.1.1
 
 function evaluate(component, env) {
-    display("==========");
-    display(component);
+    // display("==========");
+    // display(component);
     return is_literal(component)
            ? literal_value(component)
            : is_name(component)
@@ -121,12 +121,27 @@ function eval_sequence(stmts, env) {
     }
 }
 
-function scan_out_declarations(component) {
+// Given a conditional, test if any undeclared names exist
+function test_for_undeclared(component, env) {
+    evaluate(conditional_consequent(component), env);
+    evaluate(conditional_alternative(component), env);
+    return is_declaration(component)
+           ? list(declaration_symbol(component))
+           : null;
+}
+
+function scan_out_declarations(component, env) {
+    display("SCANNING OUT DECLARATIONS");
+    // display(component);
+    // display(is_conditional(component));
+    // display(evaluate(conditional_consequent(component), env));
     return is_sequence(component)
            ? accumulate(append,
                         null,
                         map(scan_out_declarations,
                             sequence_statements(component)))
+            : is_conditional(component)
+            ? test_for_undeclared(component, env)
            : is_declaration(component)
            ? list(declaration_symbol(component))
            : null;
@@ -134,15 +149,18 @@ function scan_out_declarations(component) {
 
 function eval_block(component, env) {
     const body = block_body(component);
-    const locals = scan_out_declarations(body);
+    const locals = scan_out_declarations(body, env);
     const unassigneds = list_of_unassigned(locals);
-    // display("=======");
-    // display("BODY");
-    // display(body);
-    // display("LOCALS");
-    // display(locals);
-    // display("UNASSIGNEDS");
-    // display(unassigneds);
+    display("=======");
+    display("COMPONENT");
+    display(component);
+    display("BODY");
+    display(body);
+    display("LOCALS");
+    display(locals);
+    display("UNASSIGNEDS");
+    display(unassigneds);
+    
     return evaluate(body, extend_environment(locals,
                                              unassigneds, 
                                              env));
@@ -551,8 +569,10 @@ let hoisted =
 // parse_and_evaluate(hoisted);
 
 // Q2
-let test1 = `false ? abracadabra(simsalabim) : 42;`;
-parse_and_evaluate(test1);
+// let test1 = `true ? abracadabra(simsalabim) : 42;`;
+// let test2 = `false ? abracadabra(simsalabim) : 42;`;
+// parse_and_evaluate(test1);
+// parse_and_evaluate(test2);
 
 
 
