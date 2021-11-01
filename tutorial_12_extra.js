@@ -505,9 +505,8 @@ function parse_and_evaluate(input) {
 //           : n * factorial(n - 1);
 // }
 // factorial(5);`);
-
 parse_and_evaluate(`
-const x = y;
+const x = "*unassigned*";
 const y = 42;
 const z = "***" + x + "***";
 z;
