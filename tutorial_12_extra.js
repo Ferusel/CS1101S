@@ -3,6 +3,8 @@
 // functions from SICP JS 4.1.1
 
 function evaluate(component, env) {
+    display("=======");
+    display(component);
     return is_literal(component)
            ? literal_value(component)
            : is_name(component)
@@ -91,6 +93,19 @@ function eval_block(component, env) {
     const body = block_body(component);
     const locals = scan_out_declarations(body);
     const unassigneds = list_of_unassigned(locals);
+    display("=======");
+    display("COMPONENT");
+    display(component);
+    display("BODY");
+    display(body);
+    display("LOCALS");
+    display(locals);
+    display("UNASSIGNEDS");
+    display(unassigneds);
+    display("EXTENDED ENVIRONMENT");
+    display(extend_environment(locals,
+                                 unassigneds, 
+                                 env));
     return evaluate(body, extend_environment(locals,
                                              unassigneds, 
                                              env));
@@ -167,6 +182,7 @@ function is_declaration(component) {
 function declaration_symbol(component) {
     return symbol_of_name(head(tail(component)));
 }
+
 function declaration_value_expression(component) {
     return head(tail(tail(component)));
 }
@@ -474,15 +490,22 @@ function parse_and_evaluate(input) {
 
 // test cases
 
-parse_and_evaluate(`               
-function factorial(n) {
-    return n === 1
-           ? 1
-           : n * factorial(n - 1);
-}
-factorial(5);`);
+// parse_and_evaluate(`               
+// function factorial(n) {
+//     return n === 1
+//           ? 1
+//           : n * factorial(n - 1);
+// }
+// factorial(5);`);
 
+parse_and_evaluate(`
+const x = y;
+const y = 42;
+const z = "***" + x + "***";
+z;
+`);
 
+// Problem: y is unassigned at that time
 
 
 
