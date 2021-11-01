@@ -93,16 +93,16 @@ function eval_block(component, env) {
     const body = block_body(component);
     const locals = scan_out_declarations(body);
     const unassigneds = list_of_unassigned(locals);
-    display("=======");
-    display("COMPONENT");
-    display(component);
-    display("BODY");
-    display(body);
-    display("LOCALS");
-    display(locals);
-    display("UNASSIGNEDS");
-    display(unassigneds);
-    display("EXTENDED ENVIRONMENT");
+    // display("=======");
+    // display("COMPONENT");
+    // display(component);
+    // display("BODY");
+    // display(body);
+    // display("LOCALS");
+    // display(locals);
+    // display("UNASSIGNEDS");
+    // display(unassigneds);
+    // display("EXTENDED ENVIRONMENT");
     display(extend_environment(locals,
                                  unassigneds, 
                                  env));
@@ -376,6 +376,7 @@ function extend_environment(symbols, vals, base_env) {
 }
 
 function lookup_symbol_value(symbol, env) {
+    // display("lookup_symbol_value called");
     function env_loop(env) {
         function scan(symbols, vals) {
             return is_null(symbols)
@@ -388,10 +389,17 @@ function lookup_symbol_value(symbol, env) {
             error(symbol, "unbound name");
         } else {
             const frame = first_frame(env);
+            // display(frame);
+            // display("=======");
             return scan(frame_symbols(frame), frame_values(frame));
         }
     }
-    return env_loop(env);
+    display(env_loop(env));
+    let res = env_loop(env);
+    if (res === "*unassigned*") {
+        return error(res, "ReferenceError: Cannot access value");
+    }
+    return res;
 }
 
 function assign_symbol_value(symbol, val, env) {
