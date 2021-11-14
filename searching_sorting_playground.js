@@ -88,6 +88,28 @@ function swap(A, x, y) {
     A[y] = temp;
 }
 
+// This alternative method replaces
+// the swaps by shifting elements right.
+
+function insertion_sort2(A) {
+    const len = array_length(A);
+    
+    for (let i = 1; i < len; i = i + 1) {
+        const x = A[i];
+        let j = i - 1;
+        while (j >= 0 && A[j] > x) {
+            A[j + 1] = A[j]; // shift right
+            j = j - 1;
+        }
+        A[j + 1] = x;
+    }
+}
+
+const A = [3, 9, 2, 1, 6, 5, 3, 8];
+insertion_sort2(A);
+A;
+
+
 const A = [3, 9, 2, 1, 6, 5, 3, 8];
 insertion_sort(A);
 A;
