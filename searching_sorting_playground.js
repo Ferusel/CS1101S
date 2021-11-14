@@ -67,3 +67,28 @@ function swap(A, x, y) {
 // const A = [3, 9, 2, 1, 6, 5, 3, 8];
 // selection_sort(A);
 // A;
+
+
+// Insertion Sort
+function insertion_sort(A) {
+    const len = array_length(A);
+    
+    for (let i = 1; i < len; i = i + 1) {
+        let j = i - 1;
+        while (j >= 0 && A[j] > A[j + 1]) {
+            swap(A, j, j + 1);
+            j = j - 1;
+        }
+    }
+}
+
+function swap(A, x, y) {
+    const temp = A[x];
+    A[x] = A[y];
+    A[y] = temp;
+}
+
+const A = [3, 9, 2, 1, 6, 5, 3, 8];
+insertion_sort(A);
+A;
+
