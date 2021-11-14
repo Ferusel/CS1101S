@@ -163,8 +163,8 @@ function merge(A, low, mid, high) {
     }
 }
 
-const A = [3, 9, 2, 1, 6, 5, 3, 8];
-merge_sort(A);
-A;
+const C = [3, 9, 2, 1, 6, 5, 3, 8];
+merge_sort(C);
+display(C);
 
 
