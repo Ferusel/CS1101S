@@ -116,5 +116,55 @@ const B = [3, 9, 2, 1, 6, 5, 3, 8];
 insertion_sort2(B);
 B;
 
+// Merge Sort
+function merge_sort(A) {
+    merge_sort_helper(A, 0, array_length(A) - 1);
+}
+
+function merge_sort_helper(A, low, high) {
+    if (low < high) {
+        const mid = math_floor((low + high) / 2);
+        merge_sort_helper(A, low, mid);
+        merge_sort_helper(A, mid + 1, high);
+        merge(A, low, mid, high);
+    }
+}
+
+function merge(A, low, mid, high) {
+    const B = [];
+    let left = low;
+    let right = mid + 1;
+    let Bidx = 0;
+    
+    while (left <= mid && right <= high) {
+        if (A[left] <= A[right]) {
+            B[Bidx] = A[left];
+            left = left + 1;
+        } else {
+            B[Bidx] = A[right];
+            right = right + 1;
+        }
+        Bidx = Bidx + 1;
+    }
+    
+    while (left <= mid) {
+        B[Bidx] = A[left];
+        Bidx = Bidx + 1;
+        left = left + 1;
+    }   
+    while (right <= high) {
+        B[Bidx] = A[right];
+        Bidx = Bidx + 1;
+        right = right + 1;
+    }
+    
+    for (let k = 0; k < high - low + 1; k = k + 1) {
+        A[low + k] = B[k];
+    }
+}
+
+const A = [3, 9, 2, 1, 6, 5, 3, 8];
+merge_sort(A);
+A;
 
 
