@@ -39,6 +39,32 @@ function selection_sort (xs) {
     }
 }
 
+// Merge Sort
+function merge_sort (xs) {
+    if ( is_null (xs) ||
+        is_null (tail(xs))) {
+        return xs;
+    } else {
+        const mid = middle ( length (xs ));
+        return merge(merge_sort(take(xs, mid)),
+                    merge_sort(drop(xs, mid)));
+    }
+}
+
+function merge (xs , ys) {
+    if ( is_null (xs )) {
+        return ys;
+    } else if ( is_null (ys )) {
+        return xs;
+    } else {
+        const x = head (xs );
+        const y = head (ys );
+        return (x < y)
+            ? pair (x, merge ( tail (xs), ys ))
+            : pair (y, merge (xs , tail (ys )));
+    }
+}
+
 // ARRAYS
 // Binary Search
 function binary_search(A, v) {
