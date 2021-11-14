@@ -34,7 +34,7 @@ function selection_sort (xs) {
         return xs;
     } else {
         const x = smallest (xs ); // P6A
-        return pair (x,
+        return pair(x,
         selection_sort(remove (x, xs )));
     }
 }
