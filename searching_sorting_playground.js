@@ -1,4 +1,46 @@
-// Linear Search
+// LISTS
+// Binary Search
+function binary_search (video , n, m) {
+    if (m <= n) {
+        return m;
+    } else {
+        const k = math_ceil ((n + m) / 2);
+        const frame = get_frame_from_video (video , k);
+        return broken_tyre ( frame )
+        ? binary_search (video , n, k - 1)
+        : binary_search (video , k, m);
+    }
+}
+
+
+// Insertion Sort
+function insert (x, xs) {
+    return is_null (xs)
+        ? list (x)
+        : x <= head (xs)
+        ? pair (x,xs)
+        : pair ( head (xs), insert (x, tail (xs )));
+}
+function insertion_sort (xs) {
+    return is_null (xs)
+        ? xs
+        : insert ( head (xs),
+        insertion_sort ( tail (xs )));
+}
+
+// Selection Sort
+function selection_sort (xs) {
+    if ( is_null (xs )) {
+        return xs;
+    } else {
+        const x = smallest (xs ); // P6A
+        return pair (x,
+        selection_sort(remove (x, xs )));
+    }
+}
+
+// ARRAYS
+// Binary Search
 function binary_search(A, v) {
     function search(low, high) {
         if (low > high) {
