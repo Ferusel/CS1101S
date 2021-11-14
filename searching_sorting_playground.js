@@ -82,11 +82,16 @@ function insertion_sort(A) {
     }
 }
 
-function swap(A, x, y) {
-    const temp = A[x];
-    A[x] = A[y];
-    A[y] = temp;
-}
+// function swap(A, x, y) {
+//     const temp = A[x];
+//     A[x] = A[y];
+//     A[y] = temp;
+// }
+
+const A = [3, 9, 2, 1, 6, 5, 3, 8];
+insertion_sort(A);
+A;
+
 
 // This alternative method replaces
 // the swaps by shifting elements right.
@@ -100,17 +105,16 @@ function insertion_sort2(A) {
         while (j >= 0 && A[j] > x) {
             A[j + 1] = A[j]; // shift right
             j = j - 1;
+            display("     " + stringify(A));
         }
         A[j + 1] = x;
+        display(A);
     }
 }
 
-const A = [3, 9, 2, 1, 6, 5, 3, 8];
-insertion_sort2(A);
-A;
+const B = [3, 9, 2, 1, 6, 5, 3, 8];
+insertion_sort2(B);
+B;
 
 
-const A = [3, 9, 2, 1, 6, 5, 3, 8];
-insertion_sort(A);
-A;
 
