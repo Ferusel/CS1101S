@@ -113,8 +113,8 @@ function insertion_sort2(A) {
 }
 
 const B = [3, 9, 2, 1, 6, 5, 3, 8];
-insertion_sort2(B);
-B;
+// insertion_sort2(B);
+// B;
 
 // Merge Sort
 function merge_sort(A) {
