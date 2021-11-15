@@ -14,18 +14,20 @@ function binary_search (video , n, m) {
 
 
 // Insertion Sort
+// Builds the list from the back to the front
 function insert (x, xs) {
-    return is_null (xs)
-        ? list (x)
-        : x <= head (xs)
-        ? pair (x,xs)
-        : pair ( head (xs), insert (x, tail (xs )));
+    return is_null(xs)
+        ? list(x)
+        : x <= head(xs)
+        ? pair(x,xs)
+        : pair(head(xs), insert(x, tail(xs)));
 }
-function insertion_sort (xs) {
-    return is_null (xs)
+
+function insertion_sort(xs) {
+    return is_null(xs)
         ? xs
-        : insert ( head (xs),
-        insertion_sort ( tail (xs )));
+        : insert(head(xs),
+            insertion_sort(tail(xs)));
 }
 
 // Selection Sort
