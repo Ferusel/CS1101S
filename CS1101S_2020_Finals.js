@@ -106,18 +106,22 @@ function scream_ref(s, n) {
     }
     return helper(s, 0, n);
 }
+
+// tail(s)(s, i+1) will return pair(n+1, (s, ignore) => pair(head(s) +1, 
+//                                                      tail(integers_alt)))
+// Notice that n+1 is in the head of the returned pair
 const integers_alt = pair(0, (s, ignore) => pair(head(s) +1, 
-                                            tail(integers_alt)));
+                                                tail(integers_alt)));
                                             
-const factorials = pair(1, (s, i) => pair(head(s)*i, tail(factorials)));
-const pi_square_series = pair(0, (s, i) => pair(head(s) + (6/math_pow(i, 2)),
-                                                tail(pi_square_series)));
-const fibonacci = pair(0, (s1, ignore) =>
-                            pair(1, (s2, ignore) =>
-                                pair(head(s1) + head(s2), 
-                                    (s3, ignore) => 
-                                            pair(head(s3) + head(s2),
-                                                (s4, ignore) => pair(head(s3) + head(s4), tail(s3))))));
+// const factorials = pair(1, (s, i) => pair(head(s)*i, tail(factorials)));
+// const pi_square_series = pair(0, (s, i) => pair(head(s) + (6/math_pow(i, 2)),
+//                                                 tail(pi_square_series)));
+// const fibonacci = pair(0, (s1, ignore) =>
+//                             pair(1, (s2, ignore) =>
+//                                 pair(head(s1) + head(s2), 
+//                                     (s3, ignore) => 
+//                                             pair(head(s3) + head(s2),
+//                                                 (s4, ignore) => pair(head(s3) + head(s4), tail(s3))))));
 // scream_ref(fibonacci, 7);
 // scream_ref(integers_alt, 3);
 // scream_ref(factorials, 4);
