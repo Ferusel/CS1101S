@@ -73,17 +73,23 @@ head(tail(filter(
 // )));
 
 // Memoized Streams
+// fun is the tail of a stream
 function memo_fun(fun) {
     let already_run = false;
-    let result = undefined;
+    let result = undefined; // I am simply the stream pair(n+1, () => memo_fun(...)), 
+    // the result of the next element in the stream
 
+    // fun() is ms(), which will display a message m, and return s, which in this case
+    // is the next element of the stream, i.e the result
     function mfun() {
         if (!already_run) {
             result = fun(); // This is ms(), which returns m_integers_from(n+1), 
             // and m_integers_from(n+1) is run and returns pair(n+1, () => ms(...))
+            display("Evaluating result: " + stringify(result));
             already_run = true;
             return result;
         } else {
+            display("Returning called result: " + stringify(result));
             return result;
         }
     }
@@ -116,8 +122,10 @@ function m_integers_from(n) {
 
 const m_integers = m_integers_from(1);
 
-// stream_ref(m_integers, 0);
-// stream_ref(m_integers, 2);
+stream_ref(m_integers, 0);
+stream_ref(m_integers, 2);
+display("====BREAK====");
+// display(m_integers);
 // stream_ref(m_integers, 5);
 // display("BREAK");
 // display(m_integers);
