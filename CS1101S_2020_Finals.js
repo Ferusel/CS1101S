@@ -1,4 +1,5 @@
 
+// Q4
 // Continuation-passing style
 function accumulate_iter(f, init, xs) {
     function acc(ys, cont) {
@@ -30,6 +31,7 @@ accumulate_iter( (x, y) => x / y, 2, list(24, 16, 8) );
 // (24/ (16 / (8/ 2)))
 // (c =>(b => (a => identity(divide(24, a)))(divide(16, b)))(divide(8, c)))(2)
 
+// Q7
 function last_pair(xs) {
     return is_null(tail(xs))
             ? xs
@@ -68,6 +70,7 @@ function partially_hoopify(xs, m) {
 // let b = partially_hoopify(a, 2);
 // b;
 
+// Q9
 // const hh1 = pair(undefined, undefined);
 // let a = pair(1, 1);
 // set_head(hh1, hh1);
