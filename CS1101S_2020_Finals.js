@@ -102,7 +102,8 @@ function scream_ref(s, n) {
         // display(s);
         return k === 0
                 ? head(s)
-                : helper(tail(s)(s, i+1), i+1, k-1);
+                : helper(tail(s)(s, i+1), i+1, k-1); // tail(s)(s, i+1) will 
+                // produce a new part of the stream! (acting as an rsf)
     }
     return helper(s, 0, n);
 }
@@ -124,6 +125,6 @@ const factorials = pair(1, (s, i) => pair(head(s)*i, tail(factorials)));
 //                                                 (s4, ignore) => pair(head(s3) + head(s4), tail(s3))))));
 // scream_ref(fibonacci, 7);
 // scream_ref(integers_alt, 3);
-// scream_ref(factorials, 4);
+// scream_ref(factorials, 1);
 // scream_ref(pi_square_series, 4);
 // tail(tail(integers_alt)(integers_alt, 100))(integers_alt, 100);
