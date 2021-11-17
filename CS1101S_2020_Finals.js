@@ -1,3 +1,33 @@
+
+// Continuation-passing style
+function accumulate_iter(f, init, xs) {
+    function acc(ys, cont) {
+        return is_null(ys) 
+              ? cont(init)
+              : acc(tail(ys), x => cont(f(head(ys), x)));
+    }
+    return acc(xs, x => x);
+}
+
+
+
+// function accumulate_iter(f, init, xs) {
+//     let mem = [];
+//     let i = 0;
+//     while (!is_null(xs)) {
+//         mem[i] = head(xs);
+//         xs = tail(xs);
+//         i = i+1;
+//     }
+//     let res = init;
+//     for (let j = array_length(mem)-1; j > -1; j = j-1) {
+//         res = mem[j] / res;
+//     }
+//     return res;
+// }
+
+accumulate_iter( (x, y) => x / y, 2, list(24, 16, 8) );
+
 function last_pair(xs) {
     return is_null(tail(xs))
             ? xs
@@ -62,7 +92,7 @@ const fibonacci = pair(0, (s1, ignore) =>
                                     (s3, ignore) => 
                                             pair(head(s3) + head(s2),
                                                 (s4, ignore) => pair(head(s3) + head(s4), tail(s3))))));
-scream_ref(fibonacci, 7);
+// scream_ref(fibonacci, 7);
 // scream_ref(integers_alt, 3);
 // scream_ref(factorials, 4);
 // scream_ref(pi_square_series, 4);
