@@ -85,11 +85,11 @@ function memo_fun(fun) {
         if (!already_run) {
             result = fun(); // This is ms(), which returns m_integers_from(n+1), 
             // and m_integers_from(n+1) is run and returns pair(n+1, () => ms(...))
-            display("Evaluating result: " + stringify(result));
+            // display("Evaluating result: " + stringify(result));
             already_run = true;
             return result;
         } else {
-            display("Returning called result: " + stringify(result));
+            // display("Returning called result: " + stringify(result));
             return result;
         }
     }
@@ -114,20 +114,25 @@ function ms(m, s) {
     pair(n, mfun3()) // Returns 3
 */
 function m_integers_from(n) {
+    display(n);
     return pair(n, 
         memo_fun(
-            () => ms("M: " + stringify(n), 
+            () => ms("M: " + stringify(n), // delay()
                      m_integers_from(n + 1))));
 }
 
 const m_integers = m_integers_from(1);
 
-stream_ref(m_integers, 0);
-stream_ref(m_integers, 2);
-display("====BREAK====");
-// display(m_integers);
-// stream_ref(m_integers, 5);
-// display("BREAK");
+// Returns the nth item of the fibonacci sequence
+function fibo_stream(n) {
+    return n <= 1
+            ? pair(n, () => ms("n: " + stringify(n),
+                                fibo_stream()));
+}
+
+// stream_ref(m_integers, 0);
+// stream_ref(m_integers, 2);
+// display("====BREAK====");
 // display(m_integers);
 // stream_ref(m_integers, 5);
 
