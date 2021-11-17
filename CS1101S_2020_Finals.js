@@ -27,6 +27,8 @@ function accumulate_iter(f, init, xs) {
 // }
 
 accumulate_iter( (x, y) => x / y, 2, list(24, 16, 8) );
+// (24/ (16 / (8/ 2)))
+// (c =>(b => (a => identity(divide(24, a)))(divide(16, b)))(divide(8, c)))(2)
 
 function last_pair(xs) {
     return is_null(tail(xs))
@@ -69,7 +71,26 @@ function partially_hoopify(xs, m) {
 // const hh1 = pair(undefined, undefined);
 // let a = pair(1, 1);
 // set_head(hh1, hh1);
+// set_tail(hh1, hh1);
 // draw_data(hh1);
+
+// Q12
+function zip_array(arr1, arr2) {
+    let res = [];
+    let k = 0;
+    for (let i = 0; i < array_length(arr1); i = i+1) {
+        res[k] = arr1[i];
+        k = k+1;
+        res[k] = arr2[i];
+        k = k+1;
+    }
+    return res;
+}
+
+// let arr1 = [1,2,3];
+// let arr2 = [10,20,30];
+// zip_array(arr1, arr2);
+
 function scream_ref(s, n) {
     function helper(s, i, k) {
         // display(i);
