@@ -1,3 +1,4 @@
+// Q1A
 function last_member(x, xs) {
     function find_last_member(ys, current_last) {
         let next = member(x, ys);
@@ -12,6 +13,22 @@ function last_member(x, xs) {
 
 // last_member(1, list(1,2,1,3,1,2));
 
+// Q1D
+function mutable_append(xs, ys) {
+    if (is_null(tail(xs))) {
+        set_tail(xs, ys);
+    } else {
+        mutable_append(tail(xs), ys);
+        return xs;
+    }
+}
+
+let xs = list(1,2,3);
+let ys = list(4,5,6);
+// mutable_append(xs, ys);
+// xs;
+
+// Q1E
 function transform_tree(t) {
     t = reverse(t);
     return map(subtree => is_list(subtree)
@@ -22,7 +39,7 @@ function transform_tree(t) {
 
 let tree1 = list(1,2,3,4);
 let tree2 = list(tree1, 5, 6, 7, tree1);
-// transform_tree(tree2);
+transform_tree(tree2);
 
 function shorten_stream(s, k) {
     return k > 0
@@ -45,4 +62,4 @@ function length_cps(xs, ret) {
     }
 }
 
-length_cps(list(1,2,3), display);
+// length_cps(list(1,2,3), display);
