@@ -22,6 +22,30 @@ let bs = mutable_reverse(as);
 // bs;
 // as;
 
+// Q4
+function circular_right_shift(arr) {
+    let height = array_length(arr);
+    let width = array_length(arr[0]);
+    let last = arr[height-1][width-1];
+    for (let i = height-1; i > 0; i = i-1) {
+        for (let j = width - 1; j > 0; j = j-1) {
+            display(arr);
+            display("i: " + stringify(i));
+            display("j: " + stringify(j));
+            arr[i][j] = arr[i][j-1];
+        }
+        arr[i][0] = arr[i-1][width-1];
+    }
+    for (let j = width-1; j > 0; j = j-1) {
+        arr[0][j] = arr[0][j-1];
+    }
+    arr[0][0] = last;
+}
+
+let arr1 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]];
+circular_right_shift(arr1);
+display(arr1);
+
 function tree_to_tream(tree) {
     if (is_null(tree)) {
         return tree;
@@ -37,8 +61,8 @@ function tree_to_tream(tree) {
 let tree1 = list(1,2,3,4);
 let tree2 = list(1,2, list(3,4), 5,6);
 
-let tream1 = tree_to_tream(tree1);
-let tream2 = tree_to_tream(tree2);
+// let tream1 = tree_to_tream(tree1);
+// let tream2 = tree_to_tream(tree2);
 // stream_to_list(tream2);
 // stream_to_list(stream_ref(tream2, 2));
 
@@ -55,6 +79,6 @@ function tream_map(f, t) {
 }
 // stream_to_list(tream1);
 // let tream3 = tream_map(x => x*2, tream1);
-let tream4 = tream_map(x => x*2, tream2);
+// let tream4 = tream_map(x => x*2, tream2);
 
-stream_to_list(tream4);
+// stream_to_list(tream4);
