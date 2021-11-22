@@ -10,6 +10,30 @@ function gee(b) {
     x = x+2;
     return b+x;
 }
+
+// Q1H
+function table_to_snake_list(array, height, width) {
+    let res = null;
+    let flag = true;
+    for (let i = 0; i < height; i = i+1) {
+        if (flag) {
+            for (let j = 0; j < width; j = j+1) {
+                res = append(res, list(array[i][j]));
+            }
+        } else {
+            for (let j = width-1; j > -1; j = j-1) {
+                res = append(res, list(array[i][j]));
+            }
+        }
+        flag = !flag;
+    }
+    return res;
+}
+
+let table = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]];
+table_to_snake_list(table, 4, 3);
+
+
 // foo(3);
 function mergeB(xs, ys) {
     if (is_null(xs)) {
@@ -39,7 +63,6 @@ function mergeB(xs, ys) {
 let lst1 = list(2, 3, 6);
 let lst2 = list(1, 4, 5);
 // mergeB(lst1, lst2);
-
 function powerset(set){
     if (is_null(tail(set))) {
         return list(list(head(set)), list());
@@ -51,4 +74,4 @@ function powerset(set){
 }
 
 let set1 = list(1, 2, 3, 4);
-display_list(powerset(set1));
+// display_list(powerset(set1));
