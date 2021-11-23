@@ -1,79 +1,45 @@
-// Q4
-function closest_two_power(x) {
-    return math_pow(2, math_floor(math_log2(x)));
-}
-
-// function min_tiles(L, W) {
-//     if (L === 0 || W === 0) {
-//         return 0;
-//     } else if (L === 1 && W === 1) {
-//         return 1;
-//     } else {
-//         const min_dim = (L <= W) ? L : W;
-//         const two_pow = closest_two_power(min_dim);
-//         return 1 + min_tiles(L - two_pow, W)
-//                     + min_tiles(two_pow, W - two_pow);
-//     }
-// }
-
-function min_tiles(L, W) {
-    if (L === 0 || W === 0) {
-        return 0;
-    } else if (L === 1 && W === 1) {
-        return 1;
-    } else {
-        let x = closest_two_power(math_min(L, W));
-        if ((L-x>=0) && (W-x>=0)) {
-            return 1 + min_tiles(L-x, x) + min_tiles(L, W-x);
-        } else if (L===1) {
-            return 1 + min_tiles(L, W-1);
-        } else if (W===1) {
-            return 1 + min_tiles(L-1, W);
-        }
-    }
-}
-
-// min_tiles(6, 7);
-
-// Q5B
-// function bubblesort_list(L) {
-//     const len = length(L);
-//     for (let i = len - 1; i >= 1; i = i - 1) {
-//         let p = L;
-//         for (let j = 0; j < i; j = j + 1) {
-//             if (head(p) > head(tail(p))) {
-//                 const temp = head(p);
-//                 set_head(p, head(tail(p)));
-//                 set_head(tail(p), temp);
-//             } else { }
-//             p = tail(p);
-//         }
-//     }
-// }
-
-function bubblesort_list(L) {
-    const len = length(L);
-    for (let i = len - 1; i >= 1; i = i - 1) {
-        let p = L;
-        for (let j = 0; j < i; j = j + 1) {
-            if (list_ref(L, j) > list_ref(L, j+1)) {
-                const a = list_ref(L, j);
-                const b = list_ref(L, j+1);
-                function setter(xs, n, x) {
-                    if (n === 0) {
-                        let tmp = head(xs);
-                        set_head(xs, x);
-                    } else {
-                        return setter(tail(xs), n-1, x);
-                    }
-                }
-                setter(xs, j, b);
-                setter(xs, j+1, a);
+// Q1B 
+function similar(lst1, lst2) {
+    function helper(lst1, lst2, flag) {
+        if (is_null(lst1) && is_null(lst2)) {
+            return true;
+        } else if (head(lst1) !== head(lst2)) {
+            if (flag) {
+                return false;
+            } else {
+                return helper(lst1, lst2, false);
             }
+        } else if (is_list(head(lst1))){
+            return helper(head(lst1), head(lst2), flag) && helper(tail(lst1), tail(lst2), flag);
+        } else {
+            return helper(tail(lst1), tail(lst2), flag);
         }
+    }
+    return helper(lst1, lst2, true);
+}
+
+let lst1 = list(4, list(5, 6));
+let lst2 = list(4, null, list(5, 6));
+let lst3 = list(5, null, list(4, 7));
+similar(lst1, lst2);
+
+// Q2D
+function enter_copies(a, n, value, from) {
+    if (n === 0) { // done
+    } else {
+        a[from] = value;
+        enter_copies(a, n - 1, value, from + 1);
     }
 }
 
-let xs = list(3,5,2,4,1);
-bubblesort_list(xs);
-xs;
+function generate_sorted(arr) {
+    let result = [];
+    for (let i = 0; i < array_length(arr); i = i+1) {
+        if (arr[i] !== 0) {
+            result = enter_copies(res, arr[i], i, array_length(result));
+        }
+    }
+    return res;
+}
+let histogram = [0,2,1,1,0,2,0,1,0,0,1,0,0];
+generate_sorted(histogram);
