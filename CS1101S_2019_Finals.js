@@ -53,3 +53,19 @@ function array_permutations(a) {
 }
 
 array_permutations(arraytree1);
+
+// Q8A
+function perms01(n, m) {
+    if ((n === 0) && (m === 0)) {
+        return list(null);
+    } else if (n < 0 || m < 0) {
+        return null;
+    } else {
+        let a = map(x => pair(0, x), perms01(n-1, m));
+        let b = map(x => pair(1, x), perms01(n, m-1));
+        return append(a, b);
+    }
+}
+
+display_list(perms01(3, 2));
+head(perms01(3, 2));
