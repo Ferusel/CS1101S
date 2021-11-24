@@ -42,21 +42,34 @@ function circular_right_shift(arr) {
     arr[0][0] = last;
 }
 
-let arr1 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]];
-circular_right_shift(arr1);
-display(arr1);
+// let arr1 = [[1,2,3],[4,5,6],[7,8,9],[10,11,12]];
+// circular_right_shift(arr1);
+// display(arr1);
 
-function tree_to_tream(tree) {
-    if (is_null(tree)) {
-        return tree;
-    } else if (is_list(head(tree))) {
-        return pair(tree_to_tream(head(tree)),
-                    () => tree_to_tream(tail(tree)));
-    } else {
-        return pair(head(tree),
-                    () => tree_to_tream(tail(tree)));
-    }
-}
+// function tree_to_tream(tree) {
+//     if (is_null(tree)) {
+//         return tree;
+//     } else if (is_list(head(tree))) {
+//         return pair(tree_to_tream(head(tree)),
+//                     () => tree_to_tream(tail(tree)));
+//     } else {
+//         return pair(head(tree),
+//                     () => tree_to_tream(tail(tree)));
+//     }
+// }
+
+// function tree_to_tream(tree) {
+//     if (is_null(tree)) {
+//         return null;
+//     } else {
+//         let x = () => tree_to_tream(tail(tree));
+//         if (is_pair(head(tree))) {
+//             return pair(tree_to_tream(head(tree)), x);
+//         } else {
+//             return pair(head(tree), x);
+//         }
+//     }
+// }
 
 let tree1 = list(1,2,3,4);
 let tree2 = list(1,2, list(3,4), 5,6);
