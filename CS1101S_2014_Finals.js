@@ -62,7 +62,7 @@ function mergeB(xs, ys) {
 
 let lst1 = list(2, 3, 6);
 let lst2 = list(1, 4, 5);
-// mergeB(lst1, lst2);
+mergeB(lst1, lst2);
 function powerset(set){
     if (is_null(tail(set))) {
         return list(list(head(set)), list());
@@ -73,5 +73,6 @@ function powerset(set){
     }
 }
 
-let set1 = list(1, 2, 3, 4);
+// member(6, list(6));
+// let set1 = list(1, 2, 3, 4);
 // display_list(powerset(set1));
