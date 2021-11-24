@@ -53,6 +53,11 @@ function integers_from(n) {
 // let test = shorten_stream(integers_from(1), 10);
 // stream_ref(test, 10);
 
+// Q3
+function plus_cps(x, y, ret) {
+    return ret(x + y);
+}
+
 function length_cps(xs, ret) {
     if (is_null(xs)) {
         return ret(0);
@@ -62,4 +67,19 @@ function length_cps(xs, ret) {
     }
 }
 
+function sum_cps(x, y, z, ret) {
+    return plus_cps(x, y, k => plus_cps(z, k, ret));
+}
+
+function factorial(n, ret) {
+    if (n === 0) {
+        return ret(1);
+    } else {
+        return factorial(n-1, x => ret(n * x));
+    }
+}
+
+factorial(3, display);
+
+// sum_cps(1,2,3,display);
 // length_cps(list(1,2,3), display);
